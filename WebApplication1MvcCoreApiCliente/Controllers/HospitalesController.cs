@@ -25,5 +25,10 @@ namespace WebApplication1MvcCoreApiCliente.Controllers
             List<Hospital> hospitales = await this.service.GetHospitalesAsync();
             return View(hospitales);
         }
+        public async Task<IActionResult> FindHospital(int idHospital)
+        {
+            Hospital hosp = await this.service.FindHospitalAsync(idHospital);
+            return View(hosp);
+        }
     }
 }

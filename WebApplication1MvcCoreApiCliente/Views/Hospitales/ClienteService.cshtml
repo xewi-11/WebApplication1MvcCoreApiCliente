@@ -14,6 +14,7 @@
             <th>Direccion</th>
             <th>Telefono</th>
             <th>Camas</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
                 <td>@hospital.Direccion</td>
                 <td>@hospital.Telefono</td>
                 <td>@hospital.Camas</td>
+                <td><a asp-controller="Hospitales" asp-action="FindHospital" asp-route-idHospital="@hospital.IdHospital">Detalles Hospital</a></td>
             </tr>
         }
     </tbody>

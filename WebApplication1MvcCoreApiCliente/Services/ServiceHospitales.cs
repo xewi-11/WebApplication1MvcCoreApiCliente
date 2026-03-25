@@ -13,9 +13,9 @@ namespace WebApplication1MvcCoreApiCliente.Services
         private MediaTypeWithQualityHeaderValue header;
 
 
-        public ServiceHospitales()
+        public ServiceHospitales(IConfiguration conf)
         {
-            this.apiUrl = "https://apicorehospitalesjam.azurewebsites.net/";
+            this.apiUrl = conf.GetValue<string>("ApiUrls:ApiHospitales");
             this.header = new MediaTypeWithQualityHeaderValue("application/json");
 
         }
@@ -46,7 +46,31 @@ namespace WebApplication1MvcCoreApiCliente.Services
                     throw new Exception("Error en la respuesta de la API: " + (int)response.StatusCode);
                 }
             }
+        }
+        public async Task<Hospital> FindHospitalAsync(int idHospital)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string request = "api/Hospitales/" + idHospital;
+                client.BaseAddress = new Uri(this.apiUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.header);
+                HttpResponseMessage response = await client.GetAsync(request);
+                if (response.IsSuccessStatusCode == true)
+                {
+                    //Si las propiedades del model y del json se llaman igual no es necesario decorar con JSON property y tmp utilizar jsonConvert
+
+                    Hospital hosp = await response.Content.ReadAsAsync<Hospital>();
+                    return hosp;
+                }
+                else
+                {
+                    throw new Exception("Error en la respuesta de la API: " + (int)response.StatusCode);
+                }
+
+            }
 
         }
     }
 }
+

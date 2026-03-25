@@ -1,0 +1,19 @@
+﻿@using ApiCoreHospitales.Models
+@model Hospital
+
+<h1>Find Hospital</h1>
+
+
+
+@if(Model == null)
+{
+    <p>No se encontró el hospital.</p>
+    <p>Introduzca un id para buscar</p>
+    return;
+}else{
+<div>
+    <h2>@Model.Nombre</h2>
+    <p>Dirección: @Model.Direccion</p>
+    <p>Teléfono: @Model.Telefono</p>
+</div>
+}
