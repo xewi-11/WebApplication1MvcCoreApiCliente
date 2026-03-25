@@ -1,0 +1,17 @@
+﻿@using NugetApiModels.Models
+@model Empleado
+
+<h1>Detalles del Empleado</h1>
+
+@if (Model == null)
+{
+    <p>No se encontró el empleado.</p>
+}
+else
+{
+    <div>
+        <h2>@Model.Apellido</h2>
+        <p>Departamento: @Model.DeptNo</p>
+        <p>Salario: @Model.Salario</p>
+    </div>
+}

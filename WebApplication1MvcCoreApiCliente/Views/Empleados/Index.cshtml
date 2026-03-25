@@ -1,0 +1,32 @@
+﻿@using NugetApiModels.Models
+@model List<Empleado>
+
+
+    <h1>Empleados</h1>
+
+<table class="table table-bordered table-warning">
+    <thead>
+        <tr>
+            <th>Id Empleado</th>
+            <th>Nombre</th>
+            <th>Departamento</th>
+            <th>Salario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empleado in Model)
+        {
+            <tr>
+                <td>@empleado.EmpNo</td>
+                <td>@empleado.Apellido</td>
+                <td>@empleado.DeptNo</td>
+                <td>@empleado.Salario</td>
+                <td>
+                    <a asp-action="Detalles" asp-route-emp_no="@empleado.EmpNo">Detalles</a> |
+                    <a asp-action="Delete" asp-route-emp_no="@empleado.EmpNo">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
