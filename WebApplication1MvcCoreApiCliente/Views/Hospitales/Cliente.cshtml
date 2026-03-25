@@ -1,0 +1,48 @@
+﻿
+<h1>Cliente</h1>
+
+@section Scripts{
+        <script>
+        $(document).ready(function () {
+            $("#btnhospital").click(function () {
+                let url = "https://apicorehospitalesjam.azurewebsites.net/";
+                $.ajax({
+                    url: url + "api/hospitales",
+                    method: "GET",
+                    success: function (data) {
+                        console.log("Todo Funciona!!!");
+                        var html = "";
+                        $.each(data, (function (index, hospital) {
+                            html += "<tr>";
+                            html += "<td>" + hospital.idHospital + "</td>";
+                            html += "<td>" + hospital.nombre + "</td>";
+                            html += "<td>" + hospital.direccion + "</td>";
+                            html += "<td>" + hospital.telefono + "</td>";
+                            html += "<td>" + hospital.camas + "</td>";
+                            html += "</tr>";
+                        }));
+                        $("#tablaHospital tbody").html(html);
+                    }
+                })
+            });
+        });
+    </script>
+}
+
+
+<button id="btnhospital" class="btn btn-warning">Load Hospitales</button>
+
+<table id="tablaHospital" class="table table-bordered">
+        <thead>
+        <tr>
+            <th>id Hospital</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Camas</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
